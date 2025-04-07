@@ -1,0 +1,58 @@
+﻿Create a service account and download the key:
+
+Go to the Google Cloud Console. https://console.cloud.google.com/
+Create a new project or select an existing project. fastal-test-project
+Enable the Google Drive API for your project. 
+Navigate to the "APIs & Services" > "Credentials" page.
+Click "Create Credentials" and choose "Service Account". EyesOnSysLoggerServiceAcct
+Follow the prompts to create a new service account.
+Download the service account key (JSON) and save it as service-account-key.json in your project directory.
+Install Google.Apis.Drive.v3 NuGet package:
+
+Open your project in Visual Studio.
+Install the Google.Apis.Drive.v3 NuGet package using the NuGet Package Manager or the Package Manager Console with the following command:
+Code
+Install-Package Google.Apis.Drive.v3
+Run the C# program:
+
+Ensure that the service-account-key.json file is in the same directory as your C# project.
+Run the program. It will use the service account to upload the events.html file to your Google Drive and display the file ID.
+
+
+
+If you can't find the uploaded file in your Google Drive, there are a few things you might need to check:
+
+Service Account Permissions: Ensure that the service account has the necessary permissions to access and write to your Google Drive. By default, the service account has its own separate Drive storage. To access your personal Drive, you need to share a folder with the service account and upload files to that folder.
+
+Shared Folder: Share a folder in your Google Drive with the service account email. You can find the service account email in the JSON key file. Once shared, you can specify the folder ID in the upload request to ensure the file is uploaded to the correct location.
+
+Folder ID: Make sure to specify the folder ID in the upload request if you want to upload the file to a specific folder.
+
+Here's how to update the code to upload the file to a shared folder:
+
+Share a Folder:
+
+Create a folder in your Google Drive.
+Share the folder with the service account email (found in the service-account-key.json file).
+Update the C# Code:
+
+Specify the folder ID in the upload request to ensure the file is uploaded to the shared folder.
+
+Steps to follow:
+Create a Shared Folder:
+
+Go to your Google Drive.
+Create a new folder.
+Right-click the folder and select "Share".
+Share the folder with the service account email (found in the service-account-key.json file). Give it "Editor" permissions.
+Get the Folder ID:
+
+Open the shared folder in Google Drive.
+Copy the folder ID from the URL. It will look something like this: https://drive.google.com/drive/folders/YOUR_SHARED_FOLDER_ID.
+Update the Code:
+
+Replace YOUR_SHARED_FOLDER_ID in the code with the actual folder ID you copied.
+Run the Program:
+
+Ensure that the service-account-key.json file is in the same directory as your C# project.
+Run the program. It will use the service account to upload the events.html file to the shared folder in your Google Drive and display the file ID.
